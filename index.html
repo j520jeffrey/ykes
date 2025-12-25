@@ -74,17 +74,41 @@
     .html-content p { margin: 0 0 0.5em 0; }
     .html-content img { max-width: 100%; height: auto; }
     
-    /* Carousel */
-    .carousel-container { position: relative; max-width: 100%; margin: auto; overflow: hidden; border-radius: 5px; }
-    .carousel-slide { display: none; width: 100%; position: relative; }
-    .carousel-slide img { width: 100%; height: auto; object-fit: cover; display: block; }
-    .carousel-caption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.7); color: #fff; text-align: center; font-size: 1.2em; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; }
-    .carousel-slide:hover .carousel-caption { opacity: 1; }
-    .carousel-grid-container { display: flex; gap: 15px; }
-    .carousel-grid-item { width: calc((100% - 30px) / 3); flex-grow: 0; flex-shrink: 0; text-align: center; background: transparent; padding: 5px; border-radius: 5px; box-sizing: border-box; }
-    .carousel-grid-item img { width: 100%; height: 200px; object-fit: contain; border-radius: 3px; }
-    .carousel-grid-item iframe { width: 100%; height: 200px; object-fit: cover; border-radius: 3px; }
-    .carousel-grid-item .carousel-caption { position: static; color: #333; background: transparent; opacity: 1; font-size: 1em; padding: 5px 0 0 0; height: 2.4em; overflow: hidden; }
+    /* Carousel (RWD 修正版 V3 - 解決壓扁與堆疊問題) */
+    .carousel-container { position: relative; max-width: 100%; margin: auto; overflow: hidden; border-radius: 5px; min-height: 200px; }
+    .carousel-inner { display: flex; width: 100%; justify-content: center; }
+    
+    /* 預設樣式 (適用於單欄或手機) */
+    .carousel-item { 
+        display: none; 
+        width: 100%; 
+        max-width: 100%;
+        flex: 0 0 100%; /* 強制佔滿一行 */
+        min-height: 200px; 
+        flex-shrink: 0; 
+        animation-name: fade; 
+        animation-duration: 1.5s; 
+        box-sizing: border-box; 
+        text-align: center; 
+    }
+    .carousel-item.active { display: block; }
+    .carousel-item img { width: 100%; height: 200px; object-fit: contain; border-radius: 3px; }
+    .carousel-item iframe { width: 100%; height: 200px; object-fit: cover; border-radius: 3px; }
+    .carousel-caption { color: #333; padding: 5px 0; font-size: 1em; }
+    
+    /* 電腦版 3 欄樣式 (使用 class .cols-3 控制，更穩定) */
+    @media (min-width: 901px) {
+        .carousel-container.cols-3 .carousel-item { 
+            width: 33.333%; 
+            flex: 0 0 33.333%; 
+            max-width: 33.333%;
+            margin: 0 5px; 
+        }
+        .carousel-container.cols-3 .carousel-item:first-child { margin-left:0; }
+        .carousel-container.cols-3 .carousel-item:last-child { margin-right:0; }
+    }
+
+    /* 控制按鈕 */
     .control-btn { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 6px 12px; margin-top: -20px; color: white; font-weight: bold; font-size: 1em; transition: 0.6s ease; border: none; user-select: none; background-color: rgba(0,0,0,0.3); text-decoration: none; z-index: 101; }
     .control-btn:hover, .control-btn:focus { background-color: rgba(0,0,0,0.8); outline: 2px solid yellow; }
     .prev { left: 0; border-radius: 0 3px 3px 0; } .next { right: 0; border-radius: 3px 0 0 3px; }
@@ -108,7 +132,7 @@
     .marquee-item::before { content: '📢 '; margin-right: 3px; }
     @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-    /* Accordion (雙層選單) */
+    /* Accordion */
     .link-list-container { list-style: none; padding: 0; margin: 0; }
     .link-list-entry { margin-bottom: 5px; }
     .single-link { display: block; text-decoration: none; color: #333; background-color: #fff; border: 1px solid #ddd; padding: 12px 15px; border-radius: 5px; transition: all 0.2s; }
@@ -156,7 +180,6 @@
         .col-row { flex-direction: column; padding: 10px; } .col-row-item { width: 100%; margin-bottom: 10px; }
         .block-card.half-width { width: 100%; }
         .sitemap-list { flex-direction: column; }
-        .carousel-grid-container { flex-direction: column; } .carousel-grid-item { width: 100%; }
     }
 </style>
 </head><body>
@@ -235,8 +258,8 @@
 <h2 class="block-title" id="blk-left-1" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">資訊分類清單</h2>
 <ul class="link-list-container">
 <li class="link-list-entry">
-<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-caaaaf77" onclick="toggleAccordion(this)" title="展開/收合 親師生專區"><span class="acc-title">親師生專區</span><span class="acc-icon">▼</span></button>
-<ul id="acc-caaaaf77" class="accordion-panel" hidden>
+<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-36475395" onclick="toggleAccordion(this)" title="展開/收合 親師生專區"><span class="acc-title">親師生專區</span><span class="acc-icon">▼</span></button>
+<ul id="acc-36475395" class="accordion-panel" hidden>
 <li class="sub-link-item"><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-709.php?Lang=zh-tw" target="_blank" title="教師專區 (另開新視窗)">教師專區</a></li>
 <li class="sub-link-item"><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-710.php?Lang=zh-tw" target="_blank" title="學生專區 (另開新視窗)">學生專區</a></li>
 <li class="sub-link-item"><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-711.php?Lang=zh-tw" target="_blank" title="家長專區 (另開新視窗)">家長專區</a></li>
@@ -333,27 +356,25 @@
 <div class="center-content-wrapper">
 <div class="block-card">
 <h2 class="block-title" id="blk-center-0" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">活動影音</h2>
-<div class="carousel-container" id="carousel-Ce6af5013">
-<div class="carousel-slide fade">
-<div class="carousel-grid-container">
-<div class="carousel-grid-item">
+<div class="carousel-container cols-3" id="carousel-C3d3b27b3" data-cols="3">
+<div class="carousel-inner">
+<div class="carousel-item active">
 <a href="https://youtu.be/p74x3UgZxJ4?si=yXw6EIV2h0u1tfXs" target="_blank" title="1141117新北市音樂比賽 (另開新視窗)"><img src="logo.png" alt="1141117新北市音樂比賽" /></a>
 <div class="carousel-caption" aria-hidden="true">1141117新北市音樂比賽</div>
 </div>
-<div class="carousel-grid-item">
+<div class="carousel-item">
 <a href="https://youtu.be/YKnjce-URno?si=e-IJAS98gIoGcyn5" target="_blank" title="114學年度新北市音樂比賽 (另開新視窗)"><img src="logo.png" alt="114學年度新北市音樂比賽" /></a>
 <div class="carousel-caption" aria-hidden="true">114學年度新北市音樂比賽</div>
 </div>
-<div class="carousel-grid-item">
+<div class="carousel-item">
 <a href="https://youtu.be/dzawgAb9zPQ?si=HpQTqyWPSWQC3oIO" target="_blank" title="114學年度新北市鄉土歌謠比賽 (另開新視窗)"><img src="logo.png" alt="114學年度新北市鄉土歌謠比賽" /></a>
 <div class="carousel-caption" aria-hidden="true">114學年度新北市鄉土歌謠比賽</div>
 </div>
 </div>
+<a class="control-btn prev" onclick="moveSlide(-1, 'C3d3b27b3')" role="button" aria-label="上一組內容">❮</a><a class="control-btn next" onclick="moveSlide(1, 'C3d3b27b3')" role="button" aria-label="下一組內容">❯</a><button class="pause-btn" onclick="togglePause('C3d3b27b3')" aria-label="暫停輪播">II 暫停</button>
+<div class="dots-container"></div>
 </div>
-<a class="control-btn prev" onclick="plusSlides(-1, 'Ce6af5013')" role="button" aria-label="上一張">❮</a><a class="control-btn next" onclick="plusSlides(1, 'Ce6af5013')" role="button" aria-label="下一張">❯</a><button class="pause-btn" onclick="togglePause('Ce6af5013')" aria-label="暫停輪播">II 暫停</button>
-<div class="dots-container">
-<span class="dot" onclick="currentSlide(1, 'Ce6af5013')" tabindex="0" role="button" aria-label="切換到第 1 組內容"></span>
-</div></div><script>initCarousel('Ce6af5013');</script>
+<script>document.addEventListener('DOMContentLoaded', function() { initCarousel('C3d3b27b3'); });</script>
 </div>
 <div class="block-card">
 <h2 class="block-title" id="blk-center-1" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">最新公告</h2>
@@ -365,27 +386,25 @@
 </div>
 <div class="block-card">
 <h2 class="block-title" id="blk-center-3" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">活動相簿</h2>
-<div class="carousel-container" id="carousel-Ca4bd5951">
-<div class="carousel-slide fade">
-<div class="carousel-grid-container">
-<div class="carousel-grid-item">
+<div class="carousel-container cols-3" id="carousel-Cbba1dd94" data-cols="3">
+<div class="carousel-inner">
+<div class="carousel-item active">
 <a href="https://photos.google.com/share/AF1QipOcZgTEqSy-DkiWFL2JmFJuZdhMmZ2Fb6_MPAD2N31bRyMD1TkUEiK9iW9Sh4kWwQ?key=LU9Zekk1cWV5T0d1eWpEVXJBbEpna19TUXNaOFNn" target="_blank" title="1141003&1017閱讀護照晉級&美展頒獎 (另開新視窗)"><img src="https://lh3.googleusercontent.com/pw/AP1GczMujD1kU4CII6zqPCKOEvaDZ14CnYspezMoZxR3XLsBLPGIGr3eXVRoKN8xZj5SwMA7YiYJ4kvcM39oNY_MWG119n_D571qDwoleY_qJqgR6nv4xtNxnawttUtaFabF6MDzkUxyf9AafSIbvdgjXDkC=w1214-h911-s-no-gm?authuser=0" alt="1141003&1017閱讀護照晉級&美展頒獎" /></a>
 <div class="carousel-caption" aria-hidden="true">1141003&1017閱讀護照晉級&美展頒獎</div>
 </div>
-<div class="carousel-grid-item">
+<div class="carousel-item">
 <a href="https://photos.google.com/share/AF1QipM0mebmGc1qE2KeN6egg4dz2kSWOn7gcYn242xr979duLbAf7qcDBpJn5DSmvpRYw?key=TFlPSEFoM3Nnd3RBcHhOdmVwWWMyU1NyM09ERDFn" target="_blank" title="2025-0624布袋戲演出（四年七班） (另開新視窗)"><img src="https://lh3.googleusercontent.com/pw/AP1GczNpQDnW0Q_kNyrsnGOSYJgW74_wCSseZHaZ3JJHat5NFja-2w5ZPB0j-caaiQP5ZN126FGXSe6hwybEWsmlo05l1hEDJ-TGjLEC9CAa1pJcSwYoAinEanb08IU7L2_L-wj-ms0VC9MQUUsPLMhYKcyF=w1356-h911-s-no-gm?authuser=0" alt="2025-0624布袋戲演出（四年七班）" /></a>
 <div class="carousel-caption" aria-hidden="true">2025-0624布袋戲演出（四年七班）</div>
 </div>
-<div class="carousel-grid-item">
+<div class="carousel-item">
 <a href="https://photos.google.com/u/0/share/AF1QipPU5rcSHDFiyFuOKoCT3mAf05XQ9avi17cSmzTfT4IjAN1hyxcQzTgSR-QRZXMysQ?key=TFlKVGg2TW9ldGlFOVRaWE1hUXlGb1o4VmVOcjNB" target="_blank" title="113-2 麥塊遊戲程式設計-社團成果 (另開新視窗)"><img src="https://lh3.googleusercontent.com/pw/AP1GczOr3NwDCWd8TvNJiykCO0_Os-kakUOwNyw88nyLyJmcM5dg8FmZqkvLWqDioMiRrlqjEtLwjNa3um7BKz3ROMS-Vk4Hxy7gU_fPPrLHzzikkew72XOGufIYcrKD3aDUbJS7MMNpiXgq27yQSJFbjdQk=w1214-h911-s-no-gm?authuser=0" alt="113-2 麥塊遊戲程式設計-社團成果" /></a>
 <div class="carousel-caption" aria-hidden="true">113-2 麥塊遊戲程式設計-社團成果</div>
 </div>
 </div>
+<a class="control-btn prev" onclick="moveSlide(-1, 'Cbba1dd94')" role="button" aria-label="上一組內容">❮</a><a class="control-btn next" onclick="moveSlide(1, 'Cbba1dd94')" role="button" aria-label="下一組內容">❯</a><button class="pause-btn" onclick="togglePause('Cbba1dd94')" aria-label="暫停輪播">II 暫停</button>
+<div class="dots-container"></div>
 </div>
-<a class="control-btn prev" onclick="plusSlides(-1, 'Ca4bd5951')" role="button" aria-label="上一張">❮</a><a class="control-btn next" onclick="plusSlides(1, 'Ca4bd5951')" role="button" aria-label="下一張">❯</a><button class="pause-btn" onclick="togglePause('Ca4bd5951')" aria-label="暫停輪播">II 暫停</button>
-<div class="dots-container">
-<span class="dot" onclick="currentSlide(1, 'Ca4bd5951')" tabindex="0" role="button" aria-label="切換到第 1 組內容"></span>
-</div></div><script>initCarousel('Ca4bd5951');</script>
+<script>document.addEventListener('DOMContentLoaded', function() { initCarousel('Cbba1dd94'); });</script>
 </div>
 </div>
 </main>
@@ -475,8 +494,8 @@
 <a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/acc" target="_blank" title="吾愛鶯園 (另開新視窗)" class="link-list-item single-link">吾愛鶯園</a>
 </li>
 <li class="link-list-entry">
-<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-12c9acaf" onclick="toggleAccordion(this)" title="展開/收合 鶯小兒童電子書"><span class="acc-title">鶯小兒童電子書</span><span class="acc-icon">▼</span></button>
-<ul id="acc-12c9acaf" class="accordion-panel" hidden>
+<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-387f3173" onclick="toggleAccordion(this)" title="展開/收合 鶯小兒童電子書"><span class="acc-title">鶯小兒童電子書</span><span class="acc-icon">▼</span></button>
+<ul id="acc-387f3173" class="accordion-panel" hidden>
 <li class="sub-link-item"><a href="http://web.ykes.ntpc.edu.tw/magazine/ykes38/" target="_blank" title="鶯小兒童第38期     (100學年度) (另開新視窗)">鶯小兒童第38期     (100學年度)</a></li>
 <li class="sub-link-item"><a href="http://web.ykes.ntpc.edu.tw/magazine/ykes51/" target="_blank" title="鶯小兒童第51期     (113學年度) (另開新視窗)">鶯小兒童第51期     (113學年度)</a></li>
 </ul>
@@ -647,7 +666,89 @@
 統一編號：34185667 | 機關代碼：382070600Y<br>
 </div></footer><script>document.getElementById('hamburger').addEventListener('click', function() { var menu = document.getElementById('nav-menu'); menu.classList.toggle('active'); });</script>
 <script> 
-var carousels = document.querySelectorAll('.carousel-container'); carousels.forEach(function(container) { var slideIndex = 0; var slides = container.querySelectorAll('.carousel-slide'); var dots = container.querySelectorAll('.dot'); var timer; var isPaused = false; var pauseBtn = container.querySelector('.pause-btn'); function showSlides(n) { if (n >= slides.length) { slideIndex = 0 } else if (n < 0) { slideIndex = slides.length - 1 } else { slideIndex = n } for (var i = 0; i < slides.length; i++) { slides[i].style.display = "none"; } for (var i = 0; i < dots.length; i++) { dots[i].className = dots[i].className.replace(" active", ""); } slides[slideIndex].style.display = "block"; if(dots.length > 0) dots[slideIndex].className += " active"; } function autoShow() { if(!isPaused) { showSlides(slideIndex + 1); timer = setTimeout(autoShow, 4000); } } if(pauseBtn) { pauseBtn.addEventListener('click', function() { isPaused = !isPaused; if(isPaused) { clearTimeout(timer); pauseBtn.innerText = '▶ 播放'; pauseBtn.setAttribute('aria-label', '播放輪播'); } else { pauseBtn.innerText = '❚❚ 暫停'; pauseBtn.setAttribute('aria-label', '暫停輪播'); autoShow(); } }); } var prev = container.querySelector('.prev'); var next = container.querySelector('.next'); if(prev) prev.addEventListener('click', function(e){ e.preventDefault(); clearTimeout(timer); showSlides(slideIndex - 1); if(!isPaused) timer = setTimeout(autoShow, 4000); }); if(next) next.addEventListener('click', function(e){ e.preventDefault(); clearTimeout(timer); showSlides(slideIndex + 1); if(!isPaused) timer = setTimeout(autoShow, 4000); }); dots.forEach((dot, dotIdx) => { dot.addEventListener('click', function() { clearTimeout(timer); showSlides(dotIdx); if(!isPaused) timer = setTimeout(autoShow, 4000); }); }); if(slides.length > 0) { showSlides(0); timer = setTimeout(autoShow, 4000); } }); 
+var carouselState = {};
+function initCarousel(uid) {
+    var container = document.getElementById('carousel-' + uid);
+    if(!container) return;
+    
+    var state = { timer: null, isPaused: false, index: 0 };
+    carouselState[uid] = state;
+    
+    var cols = parseInt(container.getAttribute('data-cols'));
+    var items = container.querySelectorAll('.carousel-item');
+    var dotsContainer = container.querySelector('.dots-container');
+
+    function getItemsPerPage() { return window.innerWidth <= 900 ? 1 : cols; }
+
+    state.showPage = function(idx) {
+        var perPage = getItemsPerPage();
+        var totalPages = Math.ceil(items.length / perPage);
+        if (idx >= totalPages) idx = 0;
+        if (idx < 0) idx = totalPages - 1;
+        state.index = idx;
+
+        items.forEach(function(el) { el.classList.remove('active'); });
+        var start = idx * perPage;
+        var end = start + perPage;
+        for (var i = start; i < end; i++) {
+            if (items[i]) items[i].classList.add('active');
+        }
+        
+        dotsContainer.innerHTML = '';
+        for (var i=0; i<totalPages; i++) {
+             var dot = document.createElement('span');
+             dot.className = 'dot' + (i === idx ? ' active' : '');
+             var label = (getItemsPerPage() === 3) ? ('切換到第 ' + (i+1) + ' 組') : ('切換到第 ' + (i+1) + ' 張');
+             dot.setAttribute('aria-label', label);
+             dot.onclick = (function(index){ return function(){ clearTimeout(state.timer); state.showPage(index); state.autoShow(); } })(i);
+             dotsContainer.appendChild(dot);
+        }
+    };
+
+    state.autoShow = function() {
+        if(!state.isPaused) {
+            state.timer = setTimeout(function() {
+                state.showPage(state.index + 1);
+                state.autoShow();
+            }, 4000);
+        }
+    };
+
+    window.addEventListener('resize', function() { state.showPage(state.index); });
+    
+    // 如果 JS 初始化前已經有 active class，就尊重它，但還是要 setup dots
+    if(items.length > 0) {
+        // 如果還沒有任何 active (例如 CSS 隱藏了)，預設第一頁
+        if(!container.querySelector('.active')) {
+            state.showPage(0);
+        } else {
+            // 已經有 active，重新計算 dots
+            state.showPage(0); 
+        }
+        state.autoShow();
+    }
+}
+
+function moveSlide(n, uid) {
+    var s = carouselState[uid];
+    if(s) { clearTimeout(s.timer); s.showPage(s.index + n); s.autoShow(); }
+}
+
+function togglePause(uid) {
+    var s = carouselState[uid];
+    if(s) {
+        s.isPaused = !s.isPaused;
+        var btn = document.querySelector('#carousel-'+uid+' .pause-btn');
+        if(s.isPaused) { 
+            clearTimeout(s.timer); 
+            if(btn) { btn.innerText = '▶ 播放'; btn.setAttribute('aria-label', '播放輪播'); }
+        } else { 
+            if(btn) { btn.innerText = 'II 暫停'; btn.setAttribute('aria-label', '暫停輪播'); }
+            s.autoShow(); 
+        }
+    }
+}
+
 function toggleMarquee(id) {
     var el = document.getElementById(id);
     var btn = el.querySelector('.marquee-btn');
