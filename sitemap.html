@@ -1,0 +1,453 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>網站導覽 - </title>
+<link rel="icon" href="favicon.ico" />
+<link href="https://fonts.googleapis.com" rel="preconnect" /><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" /><link href="https://fonts.googleapis.com/css2?family=Iansui&amp;display=swap" rel="stylesheet" />
+
+<style>
+    body { font-family: 'Iansui', 'Microsoft JhengHei', sans-serif; font-size: 100%; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+    .access-key { color: #666; text-decoration: none; font-size: 0.9em; padding: 5px; cursor: help; }
+    .access-key:focus { outline: 2px solid blue; color: #000; }
+    .header { background: #fff; padding: 10px 20px; border-bottom: 5px solid #FBBE6C; display: flex; justify-content: space-between; align-items: center; position: relative; }
+    .header-left { display: flex; align-items: center; flex-wrap: wrap; }
+    .logo-link { display: flex; align-items: center; text-decoration: none; color: inherit; flex-wrap: wrap; position: relative; }
+    .logo-link:hover { opacity: 0.8; }
+    .school-logo { height: 80px; width: auto; margin-right: 15px; }
+    .school-text { display: inline-block; vertical-align: middle; }
+    .school-title-cn { font-size: 2.25em; font-weight: normal; color: #333; margin: 0; line-height: 1.2; }
+    .school-title-en { font-size: 1.25em; color: #666; display: block; }
+    .header-right { display: flex; align-items: center; gap: 10px; }
+    .header-btn { text-decoration: none; color: #555; font-weight: bold; font-size: 1.1em; display: flex; align-items: center; padding: 5px 10px; border-radius: 5px; transition: background 0.3s; cursor: pointer; white-space: nowrap; position: relative; }
+    .header-btn:hover { background-color: #f0f8ff; color: #FBBE6C; }
+    .search-header { display: flex; align-items: center; border: 1px solid #ccc; border-radius: 20px; padding: 2px 5px; background: #fff; height: 36px; }
+    .search-header input { border: none; outline: none; padding: 0 10px; font-size: 1em; width: 150px; background: transparent; }
+    .search-header button { background: none; border: none; cursor: pointer; font-size: 1.1em; color: #FBBE6C; padding: 0 8px; display: flex; align-items: center; }
+    .search-header button:hover { color: #000; }
+    .navbar { background-color: #FBBE6C; }
+    .nav-container { max-width: 100%; margin: 0 auto; padding: 0 10px; }
+    .nav-menu { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; }
+    .nav-item { position: relative; }
+    .nav-link { display: block; color: white; text-align: center; padding: 14px 20px; text-decoration: none; font-size: 1.1em; position: relative; }
+    .nav-link:hover, .nav-link:focus { background-color: rgba(0,0,0,0.2); }
+    .search-mobile-container { padding: 10px 20px; background-color: rgba(0,0,0,0.1); }
+    .search-mobile { display: flex; width: 100%; background: #fff; border-radius: 5px; overflow: hidden; }
+    .search-mobile input { flex: 1; border: none; padding: 10px; outline: none; font-size: 1em; }
+    .search-mobile button { background: #eee; border: none; padding: 0 15px; cursor: pointer; color: #333; font-size: 1.1em; }
+    .search-mobile button:hover { color: #000; }
+    .dropdown-content { display: none; position: absolute; background-color: #f9f9f9; min-width: 200px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1000; top: 100%; left: 0; }
+    .dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block; text-align: left; position: relative; }
+    .dropdown-content a:hover { background-color: #ddd; }
+    .nav-item:hover .dropdown-content { display: block; }
+    .nav-item:focus-within .dropdown-content { display: block; }
+    .hamburger { display: none; background: none; border: none; color: #FBBE6C; font-size: 2.5em; cursor: pointer; position: absolute; top: 15px; right: 20px; }
+    .mobile-only { display: none; }
+    .banner-container { width: 100%; max-width: 100%; margin: 0 auto; padding-top: 10px; }
+    .banner-img { width: 100%; height: auto; display: block; object-fit: cover; max-height: 400px; }
+    
+    .container { display: flex; padding: 1.25em; gap: 1.5em; max-width: 100%; margin: 0 auto; width: 100%; box-sizing: border-box; flex: 1; justify-content: center; }
+    .col-left, .col-right { width: 20%; flex: 0 1 20%; } 
+    .col-center { width: 60%; flex: 0 1 60%; }
+    
+    .center-content-wrapper { display: flex; flex-wrap: wrap; column-gap: 1.5em; row-gap: 10px; align-content: flex-start; width: 100%; }
+    .col-row { display: flex; justify-content: space-between; gap: 1.5em; width: 100%; max-width: 100%; margin: 10px auto; box-sizing: border-box; padding: 0 1.25em; }
+    .col-row-item { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .col-row-item .block-card { height: 100%; box-sizing: border-box; }
+
+    .block-card { margin-bottom: 10px; background: #fff; padding: 10px 10px 5px 10px; border-radius: 5px; width: 100%; box-sizing: border-box; }
+    .center-content-wrapper .block-card { margin-bottom: 0 !important; }
+    .block-card.half-width { width: calc(50% - 0.75em); }
+    .block-card > *:last-child { margin-bottom: 0 !important; }
+    h2.block-title { font-size: 1.5em; border-bottom: 2px solid #ccc; padding-bottom: 0.1em; margin-bottom: 8px; margin-top: 0; }
+    
+    [data-title] { position: relative; }
+    [data-title]:hover::after { content: attr(data-title); position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; color: #333; border: 1px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.2); padding: 6px 12px; border-radius: 4px; white-space: nowrap; font-size: 0.9em; z-index: 99999; pointer-events: none; margin-top: 8px; }
+    [data-title]:hover::before { content: ''; position: absolute; top: 100%; left: 50%; margin-left: -6px; margin-top: -4px; border-width: 6px; border-style: solid; border-color: transparent transparent #fff transparent; z-index: 99999; }
+    
+    .link-list-item { display: block; text-decoration: none; color: #333; background-color: #fff; border: 1px solid #ddd; padding: 10px 15px; margin-bottom: 5px; border-radius: 5px; transition: all 0.2s ease; font-size: 1.1em; line-height: 1.4; position: relative; }
+    .link-list-item:hover { background-color: #f9f9f9; border-color: #bbb; color: #FBBE6C; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transform: translateY(-1px); }
+    
+    a.img-link { display: block; text-align: center; margin-bottom: 5px; text-decoration: none; border: 1px solid #eee; padding: 5px; border-radius: 5px; transition: transform 0.2s; position: relative; overflow: hidden; }
+    a.img-link:hover { transform: scale(1.02); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    a.img-link img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+    .img-caption { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.8); color: #fff; padding: 5px; text-align: center; font-size: 1em; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 10; }
+    a.img-link:hover .img-caption { opacity: 1; }
+    
+    .html-content { font-size: 1.1em; line-height: 1.5; color: #333; }
+    .html-content p { margin: 0 0 0.5em 0; }
+    .html-content img { max-width: 100%; height: auto; }
+    
+    /* Carousel */
+    .carousel-container { position: relative; max-width: 100%; margin: auto; overflow: hidden; border-radius: 5px; }
+    .carousel-slide { display: none; width: 100%; position: relative; }
+    .carousel-slide img { width: 100%; height: auto; object-fit: cover; display: block; }
+    .carousel-caption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.7); color: #fff; text-align: center; font-size: 1.2em; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; }
+    .carousel-slide:hover .carousel-caption { opacity: 1; }
+    .carousel-grid-container { display: flex; gap: 15px; }
+    .carousel-grid-item { width: calc((100% - 30px) / 3); flex-grow: 0; flex-shrink: 0; text-align: center; background: transparent; padding: 5px; border-radius: 5px; box-sizing: border-box; }
+    .carousel-grid-item img { width: 100%; height: 200px; object-fit: contain; border-radius: 3px; }
+    .carousel-grid-item iframe { width: 100%; height: 200px; object-fit: cover; border-radius: 3px; }
+    .carousel-grid-item .carousel-caption { position: static; color: #333; background: transparent; opacity: 1; font-size: 1em; padding: 5px 0 0 0; height: 2.4em; overflow: hidden; }
+    .control-btn { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 6px 12px; margin-top: -20px; color: white; font-weight: bold; font-size: 1em; transition: 0.6s ease; border: none; user-select: none; background-color: rgba(0,0,0,0.3); text-decoration: none; z-index: 101; }
+    .control-btn:hover, .control-btn:focus { background-color: rgba(0,0,0,0.8); outline: 2px solid yellow; }
+    .prev { left: 0; border-radius: 0 3px 3px 0; } .next { right: 0; border-radius: 3px 0 0 3px; }
+    .pause-btn { position: absolute; bottom: 10px; right: 10px; background-color: rgba(0,0,0,0.5); color: #fff; border: 1px solid #fff; border-radius: 5px; padding: 5px 10px; cursor: pointer; font-size: 0.9em; z-index: 102; }
+    .pause-btn:hover, .pause-btn:focus { background-color: #000; outline: 2px solid yellow; }
+    .dots-container { text-align: center; padding: 10px; }
+    .dot { cursor: pointer; height: 12px; width: 12px; margin: 0 4px; background-color: #bbb; border-radius: 50%; border: none; display: inline-block; transition: background-color 0.6s ease; padding: 0; }
+    .dot.active, .dot:hover, .dot:focus { background-color: #717171; outline: 2px solid blue; }
+    .fade { animation-name: fade; animation-duration: 1.5s; } @keyframes fade { from {opacity: .4} to {opacity: 1} }
+
+    /* Marquee */
+    .marquee-container { position: relative; overflow: hidden; background: #fff; border: 1px solid #ddd; border-radius: 5px; padding: 5px 5px 5px 90px; display: flex; align-items: center; height: 40px; }
+    .marquee-controls { position: absolute; left: 0; top: 0; bottom: 0; width: 85px; background: #fff; color: #FBBE6C; z-index: 10; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9em; border-right: 1px solid #eee; }
+    .marquee-btn { background: #fff; border: 1px solid #FBBE6C; color: #FBBE6C; cursor: pointer; font-size: 0.8em; padding: 2px 5px; margin-left: 5px; border-radius: 3px; }
+    .marquee-btn:hover, .marquee-btn:focus { background: #FBBE6C; color: #fff; outline: 2px solid yellow; }
+    .marquee-content-wrapper { width: 100%; overflow: hidden; }
+    .marquee-track { white-space: nowrap; display: inline-block; animation: marquee-scroll 25s linear infinite; padding-left: 100%; }
+    .marquee-paused .marquee-track, .marquee-track:hover, .marquee-track:focus-within { animation-play-state: paused; }
+    .marquee-item { display: inline-block; margin-right: 40px; font-size: 1.1em; color: #333; text-decoration: none; vertical-align: middle; position: relative; }
+    .marquee-item:hover, .marquee-item:focus { color: #FBBE6C; text-decoration: underline; outline: 2px solid blue; }
+    .marquee-item::before { content: '📢 '; margin-right: 3px; }
+    @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+    /* Accordion (雙層選單) */
+    .link-list-container { list-style: none; padding: 0; margin: 0; }
+    .link-list-entry { margin-bottom: 5px; }
+    .single-link { display: block; text-decoration: none; color: #333; background-color: #fff; border: 1px solid #ddd; padding: 12px 15px; border-radius: 5px; transition: all 0.2s; }
+    .single-link:hover { background-color: #f9f9f9; color: #FBBE6C; border-color: #FBBE6C; }
+    .accordion-btn { width: 100%; background-color: #fff; color: #333; cursor: pointer; padding: 12px 15px; border: 1px solid #ddd; border-radius: 5px; text-align: left; outline: none; font-size: 1.1em; font-family: inherit; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+    .accordion-btn:hover, .accordion-btn:focus { background-color: #f0f8ff; color: #FBBE6C; border-color: #FBBE6C; outline: 2px solid yellow; }
+    .accordion-btn[aria-expanded="true"] { background-color: #FBBE6C; color: #fff; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    .accordion-btn[aria-expanded="true"] .acc-icon { transform: rotate(180deg); }
+    .acc-icon { transition: transform 0.3s ease; font-size: 0.8em; }
+    .accordion-panel { padding: 0; background-color: #fafafa; border: 1px solid #ddd; border-top: none; border-radius: 0 0 5px 5px; list-style: none; margin: 0; }
+    .accordion-panel[hidden] { display: none; }
+    .sub-link-item a { display: block; padding: 10px 15px 10px 30px; text-decoration: none; color: #555; border-bottom: 1px dashed #eee; transition: 0.2s; position: relative; }
+    .sub-link-item a:hover, .sub-link-item a:focus { background-color: #eee; color: #FBBE6C; padding-left: 35px; outline: 2px solid yellow; }
+    .sub-link-item a::before { content: '↳'; position: absolute; left: 15px; color: #999; font-size: 0.9em; }
+    .sub-link-item:last-child a { border-bottom: none; }
+
+    /* 內頁專用 CSS */
+    .inner-wrapper { max-width: 1200px; margin: 2em auto; padding: 20px; background: #fff; min-height: 500px; display: flex; flex-direction: column; }
+    .breadcrumb { padding: 10px 0; margin-bottom: 20px; border-bottom: 1px solid #eee; font-size: 0.9em; color: #666; }
+    .breadcrumb a { color: #FBBE6C; text-decoration: none; } .breadcrumb a:hover { text-decoration: underline; }
+    .page-title { font-size: 2em; color: #333; margin: 0 0 20px 0; border-left: 5px solid #FBBE6C; padding-left: 15px; line-height: 1.2; }
+    .page-content { font-size: 1.1em; line-height: 1.8; color: #333; }
+    .page-content img { max-width: 100%; height: auto; }
+    .page-content table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    .page-content th, .page-content td { border: 1px solid #ddd; padding: 8px; }
+    .page-content th { background-color: #f2f2f2; color: #333; text-align: center; }
+
+    .footer { background: #333; color: #fff; text-align: center; padding: 2em; margin-top: auto; }
+    .footer a { color: #fff; text-decoration: underline; } .footer a:hover { color: #ccc; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    @media (max-width: 900px) {
+        .school-title-cn { font-size: 1.8em; } .school-title-en { font-size: 1em; }
+        .header-left { width: 80%; } .school-logo { height: 60px; margin-right: 10px; }
+        .header-right { display: none; } .hamburger { display: block; }
+        .mobile-only { display: block; border-bottom: 1px solid rgba(255,255,255,0.2); background-color: #FBBE6C; }
+        .navbar { background-color: #fff; border-bottom: 2px solid #FBBE6C; }
+        .nav-container { flex-wrap: wrap; }
+        .nav-menu { display: none; flex-direction: column; width: 100%; background-color: #FBBE6C; order: 3; }
+        .nav-menu.active { display: flex; } .nav-item { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .dropdown-content { position: relative; display: block; width: 100%; box-shadow: none; background-color: #FBBE6C; top: 0; }
+        .dropdown-content a { color: #fff; padding-left: 30px; } .nav-item:hover .dropdown-content { display: block; }
+        .container { flex-direction: column; }
+        .col-left, .col-center, .col-right { width: 100%; order: 0; flex: 1 1 100%; }
+        .col-center { order: 1; } .col-left { order: 2; } .col-right { order: 3; }
+        .col-row { flex-direction: column; padding: 10px; } .col-row-item { width: 100%; margin-bottom: 10px; }
+        .block-card.half-width { width: 100%; }
+        .sitemap-list { flex-direction: column; }
+        .carousel-grid-container { flex-direction: column; } .carousel-grid-item { width: 100%; }
+    }
+</style>
+<style>
+                .sitemap-wrapper { max-width: 1000px; margin: 20px auto; padding: 40px; background: #fff; min-height: 500px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+                .sitemap-desc { background: #f9f9f9; padding: 15px; border-left: 5px solid #397DB3; margin-bottom: 30px; line-height: 1.8; }
+                .sitemap-section { margin-bottom: 40px; }
+                .sitemap-h2 { font-size: 1.5em; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; color: #333; }
+                .tree-list { list-style: none; padding-left: 0; }
+                .tree-list li { position: relative; padding-left: 20px; margin: 10px 0; }
+                .tree-list li::before { content: '└─'; position: absolute; left: 0; top: 0; color: #999; font-family: monospace; }
+                .tree-list a { text-decoration: none; color: #0056b3; font-size: 1.1em; transition: 0.2s; }
+                .tree-list a:hover { color: #d35400; text-decoration: underline; }
+                .tree-sub { list-style: none; padding-left: 30px; border-left: 1px dashed #ddd; margin-left: 5px; }
+                .tree-sub li::before { content: '├─'; }
+                .tree-sub li:last-child::before { content: '└─'; }
+            </style>
+</head><body>
+<div class="header"><div class="header-left"><a href="#am" id="am" accesskey="M" title="網站導覽區" class="access-key">:::</a><a href="index.html" class="logo-link" data-title=""><div class="school-text"><h1 class="school-title-cn"></h1><span class="school-title-en"></span></div></a></div>
+<div class="header-right"><a href="index.html" class="header-btn" data-title="回首頁">🏠 回首頁</a><a href="sitemap.html" class="header-btn" title="網站導覽 (Alt+M)" accesskey="M">🗺️ 網站導覽</a><form class="search-header" onsubmit="return false;"><input type="text" id="headerSearchInput" onkeyup="filterList(this.value)" placeholder="篩選內容..." aria-label="搜尋網站" title="請輸入關鍵字"><button type="button" aria-label="搜尋" title="搜尋" onclick="filterList(document.getElementById('headerSearchInput').value)">🔍</button></form></div><button class="hamburger" id="hamburger" aria-label="開啟選單">☰</button></div>
+
+<nav class="navbar"><div class="nav-container"><ul class="nav-menu" id="nav-menu">
+<li class="nav-item mobile-only"><a href="index.html" class="nav-link" data-title="回首頁">🏠 回首頁</a></li><li class="nav-item mobile-only"><a href="sitemap.html" class="nav-link" data-title="網站導覽">🗺️ 網站導覽</a></li>
+<li class="nav-item">
+<a href="#" class="nav-link" aria-haspopup="true">關於行政 ▼</a><div class="dropdown-content">
+<a href="https://esa.ntpc.edu.tw/jsp/schdata/schdata2.jsp?schno=014620" target="_blank" title="學校沿革 (另開新視窗)">學校沿革</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/principal" target="_blank" title="現任校長 (另開新視窗)">現任校長</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm" target="_blank" title="行政團隊 (另開新視窗)">行政團隊</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/parents" target="_blank" title="家長會 (另開新視窗)">家長會</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/volunteer" target="_blank" title="志工隊 (另開新視窗)">志工隊</a>
+<a href="https://www.facebook.com/groups/616970928428227" target="_blank" title="校友會 (另開新視窗)">校友會</a>
+<a href="https://maps.app.goo.gl/cqmVjYpzSdzscn1x9" target="_blank" title="地理位置 (另開新視窗)">地理位置</a>
+<a href="http://120.102.234.52/infor/%E8%A1%8C%E6%94%BF%E9%9B%BB%E8%A9%B1%E5%88%86%E6%A9%9F.pdf" target="_blank" title="電話分機 (另開新視窗)">電話分機</a>
+</div>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link" aria-haspopup="true">行政單位 ▼</a><div class="dropdown-content">
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/principal" target="_blank" title="校長皺 (另開新視窗)">校長皺</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E6%95%99%E5%8B%99%E8%99%95" target="_blank" title="教務處 (另開新視窗)">教務處</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E5%AD%B8%E5%8B%99%E8%99%95" target="_blank" title="學務處 (另開新視窗)">學務處</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E7%B8%BD%E5%8B%99%E8%99%95" target="_blank" title="絡務處 (另開新視窗)">絡務處</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E8%BC%94%E5%B0%8E%E8%99%95" target="_blank" title="輔導處 (另開新視窗)">輔導處</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E4%B8%BB%E8%A8%88%E5%AE%A4" target="_blank" title="主計室 (另開新視窗)">主計室</a>
+<a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E4%BA%BA%E4%BA%8B%E5%AE%A4" target="_blank" title="人事室 (另開新視窗)">人事室</a>
+</div>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link" aria-haspopup="true">行事曆 ▼</a><div class="dropdown-content">
+<a href="https://drive.google.com/file/d/1dRQ-wyla1jPGzj0BMxKC_66m8AsBU461/view?usp=sharing" target="_blank" title="114上學校行事曆 (另開新視窗)">114上學校行事曆</a>
+<a href="https://drive.google.com/file/d/16DZtIob3OohUtMcgCnfIMBqtBVfiHxmD/view?usp=sharing" target="_blank" title="114上學生行事曆 (另開新視窗)">114上學生行事曆</a>
+</div>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link" aria-haspopup="true">校園活動花絮 ▼</a><div class="dropdown-content">
+<a href="https://www.ykes.ntpc.edu.tw/p/403-1000-143-1.php?Lang=zh-tw" target="_blank" title="活動相簿 (另開新視窗)">活動相簿</a>
+<a href="https://www.youtube.com/@%E9%B6%AF%E6%AD%8C%E5%9C%8B%E5%B0%8F%E6%A0%A1%E5%9C%92%E6%B4%BB%E5%8B%95%E8%8A%B1%E7%B5%AE/videos" target="_blank" title="活力影片 (另開新視窗)">活力影片</a>
+<a href="https://www.youtube.com/channel/UCvCX54hZBo8d7NRUlNNlZDw" target="_blank" title="鶯小打擊樂團Youtube影音 (另開新視窗)">鶯小打擊樂團Youtube影音</a>
+</div>
+</li>
+<li class="nav-item">
+<a href="https://" target="_self" data-title="校舍配置" class="nav-link">校舍配置</a>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link" aria-haspopup="true">教育Google ▼</a><div class="dropdown-content">
+<a href="https://play.ntpc.edu.tw/" target="_blank" title="新北教育Goolge (另開新視窗)">新北教育Goolge</a>
+<a href="https://www.google.com/a/mail.ykes.ntpc.edu.tw/ServiceLogin?service=CPanel&continue=https%3A%2F%2Fwww.google.com%3A443%2Fa%2Fcpanel%2Fmail.ykes.ntpc.edu.tw%2FDashboard&passive=true" target="_blank" title="鶯小Goolge (另開新視窗)">鶯小Goolge</a>
+<a href="https://mail.google.com/a/go.edu.tw" target="_blank" title="教育部Goolge (另開新視窗)">教育部Goolge</a>
+</div>
+</li>
+<li class="nav-item">
+<a href="#" class="nav-link" aria-haspopup="true">常用模組 ▼</a><div class="dropdown-content">
+<a href="https://esa.ntpc.edu.tw/" target="_blank" title="登入校務行政 (另開新視窗)">登入校務行政</a>
+<a href="https://esa.ntpc.edu.tw/web-announce/rest/service/view/public/OFJQdXFmQXJyaTF1WTR3YytNaC9iQTN4WW1nWWc3UGc5cVFFSElJT2pldz0" target="_blank" title="最新公告 (另開新視窗)">最新公告</a>
+<a href="https://esa.ntpc.edu.tw/web-maintain/templates/maintain_pub.html?schno=014620" target="_blank" title="設備維修 (另開新視窗)">設備維修</a>
+<a href="https://esa.ntpc.edu.tw/web-classmgt/template/pub/pubmain.html?schno=014620" target="_blank" title="場地預約 (另開新視窗)">場地預約</a>
+</div>
+</li>
+<li class="nav-item">
+<a href="https://" target="_self" data-title="附設幼兒園" class="nav-link">附設幼兒園</a>
+</li>
+<li class="nav-item mobile-only search-mobile-container"><form class="search-mobile" onsubmit="return false;"><input type="text" id="mobileSearchInput" onkeyup="filterList(this.value)" placeholder="搜尋站內連結..." aria-label="搜尋" title="請輸入關鍵字"><button type="button" title="搜尋" onclick="filterList(document.getElementById('mobileSearchInput').value)">🔍</button></form></li></ul></div></nav>
+
+<div class="sitemap-wrapper">
+<div class="breadcrumb"><a href="index.html" title="回到首頁">首頁</a> &gt; <span>網站導覽</span></div>
+<h1>網站導覽 (Sitemap)</h1>
+<div class="sitemap-desc">
+<p>本網站依無障礙網頁設計原則建置，網站的主要內容分為：導覽連結區、主要內容區、頁尾資訊區。</p>
+<p>本網站的快速鍵﹝Accesskey﹞設定如下：</p>
+<ul style="margin:0; padding-left:20px;">
+<li><strong>Alt+M</strong>：上方導覽連結區，此區塊列有本網站的主要連結。</li>
+<li><strong>Alt+C</strong>：中間主要內容區，此區塊呈現網頁的主要內容。</li>
+<li><strong>Alt+B</strong>：下方頁尾資訊區，此區塊列有網站的聯絡資訊。</li>
+</ul></div>
+<div class="sitemap-content">
+<div class="sitemap-section">
+<h2 class="sitemap-h2">1. 主要選單 (Main Navigation)</h2>
+<ul class="tree-list">
+<li><a href="index.html" data-title="首頁">首頁</a></li>
+<li><a href="#" target="_self" data-title="關於行政">關於行政</a>
+<ul class="tree-sub">
+<li><a href="https://esa.ntpc.edu.tw/jsp/schdata/schdata2.jsp?schno=014620" target="_blank" title="學校沿革 (另開新視窗)">學校沿革</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/principal" target="_blank" title="現任校長 (另開新視窗)">現任校長</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm" target="_blank" title="行政團隊 (另開新視窗)">行政團隊</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/parents" target="_blank" title="家長會 (另開新視窗)">家長會</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/volunteer" target="_blank" title="志工隊 (另開新視窗)">志工隊</a></li>
+<li><a href="https://www.facebook.com/groups/616970928428227" target="_blank" title="校友會 (另開新視窗)">校友會</a></li>
+<li><a href="https://maps.app.goo.gl/cqmVjYpzSdzscn1x9" target="_blank" title="地理位置 (另開新視窗)">地理位置</a></li>
+<li><a href="http://120.102.234.52/infor/%E8%A1%8C%E6%94%BF%E9%9B%BB%E8%A9%B1%E5%88%86%E6%A9%9F.pdf" target="_blank" title="電話分機 (另開新視窗)">電話分機</a></li>
+</ul>
+</li>
+<li><a href="#" target="_self" data-title="行政單位">行政單位</a>
+<ul class="tree-sub">
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/principal" target="_blank" title="校長皺 (另開新視窗)">校長皺</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E6%95%99%E5%8B%99%E8%99%95" target="_blank" title="教務處 (另開新視窗)">教務處</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E5%AD%B8%E5%8B%99%E8%99%95" target="_blank" title="學務處 (另開新視窗)">學務處</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E7%B8%BD%E5%8B%99%E8%99%95" target="_blank" title="絡務處 (另開新視窗)">絡務處</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E8%BC%94%E5%B0%8E%E8%99%95" target="_blank" title="輔導處 (另開新視窗)">輔導處</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E4%B8%BB%E8%A8%88%E5%AE%A4" target="_blank" title="主計室 (另開新視窗)">主計室</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/adm/%E4%BA%BA%E4%BA%8B%E5%AE%A4" target="_blank" title="人事室 (另開新視窗)">人事室</a></li>
+</ul>
+</li>
+<li><a href="#" target="_self" data-title="行事曆">行事曆</a>
+<ul class="tree-sub">
+<li><a href="https://drive.google.com/file/d/1dRQ-wyla1jPGzj0BMxKC_66m8AsBU461/view?usp=sharing" target="_blank" title="114上學校行事曆 (另開新視窗)">114上學校行事曆</a></li>
+<li><a href="https://drive.google.com/file/d/16DZtIob3OohUtMcgCnfIMBqtBVfiHxmD/view?usp=sharing" target="_blank" title="114上學生行事曆 (另開新視窗)">114上學生行事曆</a></li>
+</ul>
+</li>
+<li><a href="#" target="_self" data-title="校園活動花絮">校園活動花絮</a>
+<ul class="tree-sub">
+<li><a href="https://www.ykes.ntpc.edu.tw/p/403-1000-143-1.php?Lang=zh-tw" target="_blank" title="活動相簿 (另開新視窗)">活動相簿</a></li>
+<li><a href="https://www.youtube.com/@%E9%B6%AF%E6%AD%8C%E5%9C%8B%E5%B0%8F%E6%A0%A1%E5%9C%92%E6%B4%BB%E5%8B%95%E8%8A%B1%E7%B5%AE/videos" target="_blank" title="活力影片 (另開新視窗)">活力影片</a></li>
+<li><a href="https://www.youtube.com/channel/UCvCX54hZBo8d7NRUlNNlZDw" target="_blank" title="鶯小打擊樂團Youtube影音 (另開新視窗)">鶯小打擊樂團Youtube影音</a></li>
+</ul>
+</li>
+<li><a href="https://" target="_self" data-title="校舍配置">校舍配置</a>
+</li>
+<li><a href="#" target="_self" data-title="教育Google">教育Google</a>
+<ul class="tree-sub">
+<li><a href="https://play.ntpc.edu.tw/" target="_blank" title="新北教育Goolge (另開新視窗)">新北教育Goolge</a></li>
+<li><a href="https://www.google.com/a/mail.ykes.ntpc.edu.tw/ServiceLogin?service=CPanel&continue=https%3A%2F%2Fwww.google.com%3A443%2Fa%2Fcpanel%2Fmail.ykes.ntpc.edu.tw%2FDashboard&passive=true" target="_blank" title="鶯小Goolge (另開新視窗)">鶯小Goolge</a></li>
+<li><a href="https://mail.google.com/a/go.edu.tw" target="_blank" title="教育部Goolge (另開新視窗)">教育部Goolge</a></li>
+</ul>
+</li>
+<li><a href="#" target="_self" data-title="常用模組">常用模組</a>
+<ul class="tree-sub">
+<li><a href="https://esa.ntpc.edu.tw/" target="_blank" title="登入校務行政 (另開新視窗)">登入校務行政</a></li>
+<li><a href="https://esa.ntpc.edu.tw/web-announce/rest/service/view/public/OFJQdXFmQXJyaTF1WTR3YytNaC9iQTN4WW1nWWc3UGc5cVFFSElJT2pldz0" target="_blank" title="最新公告 (另開新視窗)">最新公告</a></li>
+<li><a href="https://esa.ntpc.edu.tw/web-maintain/templates/maintain_pub.html?schno=014620" target="_blank" title="設備維修 (另開新視窗)">設備維修</a></li>
+<li><a href="https://esa.ntpc.edu.tw/web-classmgt/template/pub/pubmain.html?schno=014620" target="_blank" title="場地預約 (另開新視窗)">場地預約</a></li>
+</ul>
+</li>
+<li><a href="https://" target="_self" data-title="附設幼兒園">附設幼兒園</a>
+</li>
+</ul></div>
+<div class="sitemap-section">
+<h2 class="sitemap-h2">2. 頁面內容區塊 (Content Blocks)</h2>
+<ul class="tree-list">
+<li><strong>左側選單區</strong>
+<ul class="tree-sub">
+<li><span>資訊分類清單</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="#" target="_self" data-title="親師生專區">親師生專區</a></li>
+<ul class="tree-sub">
+<li><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-709.php?Lang=zh-tw" target="_blank" title="教師專區 (另開新視窗)">教師專區</a></li>
+<li><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-710.php?Lang=zh-tw" target="_blank" title="學生專區 (另開新視窗)">學生專區</a></li>
+<li><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-711.php?Lang=zh-tw" target="_blank" title="家長專區 (另開新視窗)">家長專區</a></li>
+</ul>
+<li><a href="https://ptc.ntpc.edu.tw" target="_blank" title="親師生平台 (另開新視窗)">親師生平台</a></li>
+<li><a href="https://esa.ntpc.edu.tw" target="_blank" title="校務行政 (另開新視窗)">校務行政</a></li>
+<li><a href="https://cloud2.ntpc.gov.tw/" target="_blank" title="新北市公務雲 (另開新視窗)">新北市公務雲</a></li>
+<li><a href="https://doc2-attach.ntpc.gov.tw/ntpc_sodatt/" target="_blank" title="電子公文附件下載 (另開新視窗)">電子公文附件下載</a></li>
+<li><a href="https://accounting-x1.moe.gov.tw/" target="_blank" title="會計資訊系統 (另開新視窗)">會計資訊系統</a></li>
+<li><a href="https://drive.google.com/drive/folders/1v19zKDf23auQPkmypUAxkEFtAuhDDcqS" target="_blank" title="預算、決算及會計月報 (另開新視窗)">預算、決算及會計月報</a></li>
+<li><a href="https://fatraceschool.k12ea.gov.tw/frontend/search.html?school=14620" target="_blank" title="校園食材登錄平台 (另開新視窗)">校園食材登錄平台</a></li>
+<li><a href="https://www.sso.edu.tw/" target="_blank" title="教育體系單一簽入 (另開新視窗)">教育體系單一簽入</a></li>
+<li><a href="https://mail.ntpc.edu.tw/?index=1" target="_blank" title="教育局電子郵件 (另開新視窗)">教育局電子郵件</a></li>
+<li><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-703.php?Lang=zh-tw" target="_blank" title="校務系統權限變更申請 (另開新視窗)">校務系統權限變更申請</a></li>
+<li><a href="https://docs.google.com/document/d/1Ylm5QfC_kWvKlHugMDEPrheQkq3_s6pL/edit?rtpof=true&sd=true" target="_blank" title="校外人士協助教學或活動申請表 (另開新視窗)">校外人士協助教學或活動申請表</a></li>
+<li><a href="https://drive.google.com/file/d/1kaxQmy09o4IllysiZZpJinOx-07psgeA/view" target="_blank" title="場地出借與開放 (另開新視窗)">場地出借與開放</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/mis" target="_blank" title="教職員數位協助站 Q&A 專區 (另開新視窗)">教職員數位協助站 Q&A 專區</a></li>
+</ul></li>
+<li><span>課程與教材</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="#" target="_blank" title="校內教科書ISO檔下載 (另開新視窗)">校內教科書ISO檔下載</a></li>
+<li><a href="https://drive.google.com/file/d/1wc0_d5PNHAhJ6NOzfFY4nGnItC7Z_Hhq/view" target="_blank" title="課程計畫備查審定公文 (另開新視窗)">課程計畫備查審定公文</a></li>
+<li><a href="#" target="_blank" title="114學年度教科書版本 (另開新視窗)">114學年度教科書版本</a></li>
+<li><a href="#" target="_blank" title="教科書遺失處理方式 (另開新視窗)">教科書遺失處理方式</a></li>
+<li><a href="https://rrcp.ntpc.edu.tw/" target="_blank" title="課程計畫備查網站 (另開新視窗)">課程計畫備查網站</a></li>
+</ul></li>
+<li><span>政府宣導</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://cfcmweb.cy.gov.tw/cfcm_w/index.aspx" target="_blank" title="公職人員及關係人補助交易身分關係公開及查詢平臺 (另開新視窗)">公職人員及關係人補助交易身分關係公開及查詢平臺</a></li>
+<li><a href="https://www.bas.ntpc.gov.tw/home.jsp?id=1cbcf23c5905e3fb" target="_blank" title="新北市工商及服務業普查專區 (另開新視窗)">新北市工商及服務業普查專區</a></li>
+</ul></li>
+<li><span>修繕陳列模組</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="#" target="_blank" title="總務修繕 (另開新視窗)">總務修繕</a></li>
+<li><a href="#" target="_blank" title="教學設備修繕 (另開新視窗)">教學設備修繕</a></li>
+<li><a href="#" target="_blank" title="資訊設備及網路修繕 (另開新視窗)">資訊設備及網路修繕</a></li>
+</ul></li>
+</ul></li>
+<li><strong>右側選單區</strong>
+<ul class="tree-sub">
+<li><span>114寒假育樂營報名</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://camp.ntpc.edu.tw/jsp/act_register/ACTMangAction.do?method=ActMang_OutIndex&schno=019999" target="_blank" title="114寒假育樂營報名 (另開新視窗)">114寒假育樂營報名</a></li>
+</ul></li>
+<li><span>本校學區</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://drive.google.com/file/d/1BaP-APxc5dJ9R33HSNLXcUzxUJis8Aqx/view?usp=sharing" target="_blank" title="本校學區 (另開新視窗)">本校學區</a></li>
+</ul></li>
+<li><span>鶯小主題網站</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://esa.ntpc.edu.tw/014620/library" target="_blank" title="鶯小圖書館 (另開新視窗)">鶯小圖書館</a></li>
+<li><a href="https://www.facebook.com/YingGeGuoXiao" target="_blank" title="鶯歌國小FB粉絲專頁 (另開新視窗)">鶯歌國小FB粉絲專頁</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/mhi/%E9%A6%96%E9%A0%81" target="_blank" title="鶯小臺灣母語日教學 (另開新視窗)">鶯小臺灣母語日教學</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/english/" target="_blank" title="鶯小生活英語動起來 (另開新視窗)">鶯小生活英語動起來</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/kidstest" target="_blank" title="鶯小附幼臺灣母語日教學 (另開新視窗)">鶯小附幼臺灣母語日教學</a></li>
+<li><a href="https://drive.google.com/file/d/1COuqVnwlAASUqoBMccbppZd9ofxI72_a/view" target="_blank" title="鶯歌國小食農教育 (另開新視窗)">鶯歌國小食農教育</a></li>
+<li><a href="#" target="_blank" title="鶯歌國小排球隊 (另開新視窗)">鶯歌國小排球隊</a></li>
+<li><a href="https://www.facebook.com/groups/1179300082474449/?ref=share&mibextid=wwXIfr&rdid=hK4cJyWb0oWjW9qH&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2Fg%2F1Yk8T4zTTc%2F%3Fmibextid%3DwwXIfr#" target="_blank" title="鶯小打擊樂團 (另開新視窗)">鶯小打擊樂團</a></li>
+</ul></li>
+<li><span>學校成果專區</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://www.canva.com/design/DAGpuZPtK_o/W9SQVSmBX7OfhxGyhXLsuA/view?utm_content=DAGpuZPtK_o&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h582126121a#6" target="_blank" title="鶯小英文明日閱讀計畫 (另開新視窗)">鶯小英文明日閱讀計畫</a></li>
+<li><a href="https://www.canva.com/design/DAGmP-cPfgI/dSWdecgsgHJkbX0fE6DiPg/view" target="_blank" title="鶯小亮點閱讀課 (另開新視窗)">鶯小亮點閱讀課</a></li>
+<li><a href="https://www.canva.com/design/DAGmL7ecROM/2o9Tyg-1PIX25MZ2uZ9m5w/view?utm_content=DAGmL7ecROM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h11785d90ae#1" target="_blank" title="113學年數位學習成果 (另開新視窗)">113學年數位學習成果</a></li>
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/20190725-ying001" target="_blank" title="鶯小家庭教育專區 (另開新視窗)">鶯小家庭教育專區</a></li>
+<li><a href="https://www.youtube.com/playlist?list=PLxfzkuTp9yxmei3sDCc_txQqQfIUbVp6a" target="_blank" title="鶯小品德教育網 (另開新視窗)">鶯小品德教育網</a></li>
+<li><a href="#" target="_blank" title="防災教育專區 (另開新視窗)">防災教育專區</a></li>
+<li><a href="https://drive.google.com/file/d/1otDnDjAsiF2GPG3-Net4ugz25JptHi-s/view" target="_blank" title="環境教育執行成果 (另開新視窗)">環境教育執行成果</a></li>
+<li><a href="https://friendlycampus.k12ea.gov.tw/Portal" target="_blank" title="友善校園學生事務與輔導 (另開新視窗)">友善校園學生事務與輔導</a></li>
+</ul></li>
+<li><span>鶯小出版</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/acc" target="_blank" title="吾愛鶯園 (另開新視窗)">吾愛鶯園</a></li>
+<li><a href="#" target="_self" data-title="鶯小兒童電子書">鶯小兒童電子書</a></li>
+<ul class="tree-sub">
+<li><a href="http://web.ykes.ntpc.edu.tw/magazine/ykes38/" target="_blank" title="鶯小兒童第38期     (100學年度) (另開新視窗)">鶯小兒童第38期     (100學年度)</a></li>
+<li><a href="http://web.ykes.ntpc.edu.tw/magazine/ykes51/" target="_blank" title="鶯小兒童第51期     (113學年度) (另開新視窗)">鶯小兒童第51期     (113學年度)</a></li>
+</ul>
+</ul></li>
+<li><span>鶯小綠能發電</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://tatungsolarweb.azurewebsites.net/tv/2390081/" target="_blank" title="鶯小綠能發電 (另開新視窗)">鶯小綠能發電</a></li>
+</ul></li>
+<li><span>反霸凌專區</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="https://bully.moe.edu.tw/index" target="_blank" title="反霸凌專區 (另開新視窗)">反霸凌專區</a></li>
+</ul></li>
+</ul></li>
+<li><strong>下方功能區</strong>
+<ul class="tree-sub">
+<li><span>程式學習</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="#" target="_blank" title="Blockly-Games (另開新視窗)">Blockly-Games</a></li>
+<li><a href="#" target="_blank" title="Code.org (另開新視窗)">Code.org</a></li>
+<li><a href="#" target="_blank" title="Codespark (另開新視窗)">Codespark</a></li>
+<li><a href="#" target="_blank" title="Codecombat (另開新視窗)">Codecombat</a></li>
+<li><a href="#" target="_blank" title="Codemonkey (另開新視窗)">Codemonkey</a></li>
+<li><a href="#" target="_blank" title="Lightbot (另開新視窗)">Lightbot</a></li>
+<li><a href="#" target="_blank" title="Micro:bit (另開新視窗)">Micro:bit</a></li>
+<li><a href="#" target="_blank" title="Scratch (另開新視窗)">Scratch</a></li>
+<li><a href="#" target="_blank" title="Scratch_公益開放課程 (另開新視窗)">Scratch_公益開放課程</a></li>
+<li><a href="#" target="_blank" title="U世代島嶼學習樂園 (另開新視窗)">U世代島嶼學習樂園</a></li>
+</ul></li>
+<li><span>資安宣導</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="#" target="_blank" title="NCCST_宣導影片 (另開新視窗)">NCCST_宣導影片</a></li>
+<li><a href="#" target="_blank" title="網路新國民入口 (另開新視窗)">網路新國民入口</a></li>
+<li><a href="#" target="_blank" title="全民資安素養網 (另開新視窗)">全民資安素養網</a></li>
+<li><a href="#" target="_blank" title="全民資安素養自我評量 (另開新視窗)">全民資安素養自我評量</a></li>
+<li><a href="#" target="_blank" title="中小學網路素養與認知 (另開新視窗)">中小學網路素養與認知</a></li>
+<li><a href="#" target="_blank" title="教育部網路守護天使 (另開新視窗)">教育部網路守護天使</a></li>
+<li><a href="#" target="_blank" title="國家資通安全通報應變 (另開新視窗)">國家資通安全通報應變</a></li>
+<li><a href="#" target="_blank" title="iWIN_網路內容防護機構 (另開新視窗)">iWIN_網路內容防護機構</a></li>
+<li><a href="#" target="_blank" title="台灣學術網路危機處理中心 (另開新視窗)">台灣學術網路危機處理中心</a></li>
+</ul></li>
+<li><span>資訊教育</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="#" target="_blank" title="CC 台灣社群 (另開新視窗)">CC 台灣社群</a></li>
+<li><a href="#" target="_blank" title="Gimp_課程（校內） (另開新視窗)">Gimp_課程（校內）</a></li>
+<li><a href="#" target="_blank" title="Inkscape_課程（校內） (另開新視窗)">Inkscape_課程（校內）</a></li>
+<li><a href="#" target="_blank" title="呂聰賢教學頻道 (另開新視窗)">呂聰賢教學頻道</a></li>
+<li><a href="#" target="_blank" title="宏全資訊教材 (另開新視窗)">宏全資訊教材</a></li>
+<li><a href="#" target="_blank" title="校園文化教材 (另開新視窗)">校園文化教材</a></li>
+<li><a href="#" target="_blank" title="新北市教學APP市集 (另開新視窗)">新北市教學APP市集</a></li>
+<li><a href="#" target="_blank" title="新北市資訊業務入口 (另開新視窗)">新北市資訊業務入口</a></li>
+</ul></li>
+<li><span>學校成果專區</span><ul class="tree-sub" style="border-left:none;">
+<li><a href="#" target="_blank" title="鶯小英文明日閱讀計畫 (另開新視窗)">鶯小英文明日閱讀計畫</a></li>
+<li><a href="#" target="_blank" title="鶯小亮點閱讀課 (另開新視窗)">鶯小亮點閱讀課</a></li>
+<li><a href="#" target="_blank" title="113學年數位學習成果 (另開新視窗)">113學年數位學習成果</a></li>
+<li><a href="#" target="_blank" title="鶯小家庭教育專區 (另開新視窗)">鶯小家庭教育專區</a></li>
+<li><a href="#" target="_blank" title="鶯小品德教育網 (另開新視窗)">鶯小品德教育網</a></li>
+<li><a href="#" target="_blank" title="防災教育專區 (另開新視窗)">防災教育專區</a></li>
+<li><a href="#" target="_blank" title="環境教育執行成果 (另開新視窗)">環境教育執行成果</a></li>
+<li><a href="#" target="_blank" title="友善校園學生事務與輔導 (另開新視窗)">友善校園學生事務與輔導</a></li>
+</ul></li>
+</ul></li>
+</ul></div>
+</div></div>
+<footer class="footer"><a href="#ab" id="ab" accesskey="B" title="下方功能區" class="access-key" style="color:#ccc;">:::</a><div style="line-height: 1.8; margin-bottom: 15px;">© 2025 新北市鶯歌區鶯歌國民小學 版權所有<br>
+地址：39新北市鶯歌區尖山埔路106號<br>
+電話：<a href="tel:0226792038" style="color:#fff; text-decoration:underline;" data-title="撥打電話">(02)26792038</a> | 傳真：(02)2678-4724<br>
+信箱：<a href="mailto:mis@mail.ykes.ntpc.edu.tw" style="color:#fff; text-decoration:underline;" data-title="寄信">mis@mail.ykes.ntpc.edu.tw</a><br>
+統一編號：34185667 | 機關代碼：382070600Y<br>
+</div></footer><script>document.getElementById('hamburger').addEventListener('click', function() { var menu = document.getElementById('nav-menu'); menu.classList.toggle('active'); });</script>
+</body></html>
