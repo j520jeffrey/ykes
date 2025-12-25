@@ -160,16 +160,43 @@
     }
 </style>
 <style>
-                .sitemap-wrapper { max-width: 1000px; margin: 20px auto; padding: 40px; background: #fff; min-height: 500px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
-                .sitemap-desc { background: #f9f9f9; padding: 15px; border-left: 5px solid #397DB3; margin-bottom: 30px; line-height: 1.8; }
-                .sitemap-section { margin-bottom: 40px; }
-                .sitemap-h2 { font-size: 1.5em; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px; color: #333; }
+                /* 修正重點：寬度改用 % 與 ch (字元寬度)，間距改用 em */
+                .sitemap-wrapper { 
+                    width: 95%;             /* RWD 自適應寬度 */
+                    max-width: 80ch;        /* 最大寬度限制為 80 字元 (符合 FreeGo 規範) */
+                    margin: 2em auto;       /* 相對邊距 */
+                    padding: 2em;           /* 相對內距 */
+                    background: #fff; 
+                    min-height: 20em; 
+                    border-radius: 0.3em; 
+                    box-shadow: 0 0 0.6em rgba(0,0,0,0.05); 
+                }
+                .sitemap-desc { 
+                    background: #f9f9f9; 
+                    padding: 1em; 
+                    border-left: 0.3em solid #397DB3; 
+                    margin-bottom: 2em; 
+                    line-height: 1.8; 
+                }
+                .sitemap-section { margin-bottom: 2.5em; }
+                .sitemap-h2 { 
+                    font-size: 1.5em; 
+                    border-bottom: 0.1em solid #eee; 
+                    padding-bottom: 0.5em; 
+                    margin-bottom: 1em; 
+                    color: #333; 
+                }
                 .tree-list { list-style: none; padding-left: 0; }
-                .tree-list li { position: relative; padding-left: 20px; margin: 10px 0; }
+                .tree-list li { position: relative; padding-left: 1.2em; margin: 0.6em 0; }
                 .tree-list li::before { content: '└─'; position: absolute; left: 0; top: 0; color: #999; font-family: monospace; }
                 .tree-list a { text-decoration: none; color: #0056b3; font-size: 1.1em; transition: 0.2s; }
                 .tree-list a:hover { color: #d35400; text-decoration: underline; }
-                .tree-sub { list-style: none; padding-left: 30px; border-left: 1px dashed #ddd; margin-left: 5px; }
+                .tree-sub { 
+                    list-style: none; 
+                    padding-left: 1.8em; 
+                    border-left: 0.06em dashed #ddd; 
+                    margin-left: 0.3em; 
+                }
                 .tree-sub li::before { content: '├─'; }
                 .tree-sub li:last-child::before { content: '└─'; }
             </style>
@@ -244,7 +271,7 @@
 <div class="sitemap-desc">
 <p>本網站依無障礙網頁設計原則建置，網站的主要內容分為：導覽連結區、主要內容區、頁尾資訊區。</p>
 <p>本網站的快速鍵﹝Accesskey﹞設定如下：</p>
-<ul style="margin:0; padding-left:20px;">
+<ul style="margin:0; padding-left:1.5em;">
 <li><strong>Alt+M</strong>：上方導覽連結區，此區塊列有本網站的主要連結。</li>
 <li><strong>Alt+C</strong>：中間主要內容區，此區塊呈現網頁的主要內容。</li>
 <li><strong>Alt+B</strong>：下方頁尾資訊區，此區塊列有網站的聯絡資訊。</li>
