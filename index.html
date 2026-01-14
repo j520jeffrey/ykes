@@ -5,8 +5,11 @@
 <style>
     body { font-family: 'Iansui', 'Microsoft JhengHei', sans-serif; font-size: 100%; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; background-color: #f9f9f9; scroll-behavior: smooth; }
     
+    /* ★★★ 關鍵修復：跳到主要內容區塊的樣式 ★★★ */
     .skip-link { position: absolute; top: -9999px; left: 0; background: #000; color: #fff; padding: 10px; z-index: 99999; text-decoration: none; font-weight: bold; border-radius: 0 0 5px 0; }
+    /* 下面這行如果不見，按 Tab 就不會跑出來 */
     .skip-link:focus { top: 0; }
+
     .access-key { color: #fff; text-decoration: none; font-size: 0.9em; padding: 0 5px; cursor: help; }
     .access-key:focus { outline: 2px solid yellow; color: #fff; }
     
@@ -54,15 +57,23 @@
 
     
     .footer-container { 
-        width: 98%;          
-        margin: 0 auto;      
-        padding: 2em 0;      
-        text-align: left;
-        box-sizing: border-box;
+        width: 98%; margin: 0 auto; padding: 2em 0; text-align: center; box-sizing: border-box;
     }
     .footer-badge { margin-top: 15px; }
     .footer-badge img { max-height: 50px; width: auto; }
     
+
+    /* ★★★ 版權條樣式 (您剛剛新增的) ★★★ */
+    .footer-copyright {
+        width: 100%;
+        background-color: #FF8040;
+        color: #fff;
+        text-align: center;
+        padding: 15px 0;
+        font-size: 0.95em;
+        margin-top: 0;
+    }
+    .footer-copyright a { color: #fff; text-decoration: underline; }
 
     .container { display: flex; padding: 1.25em; gap: 1.5em; max-width: 100%; margin: 0 auto; width: 100%; box-sizing: border-box; flex: 1; justify-content: center; }
     .col-left, .col-right { width: 20%; flex: 0 1 20%; } 
@@ -169,7 +180,7 @@
     .back-to-top:hover { opacity: 1; background-color: #FF8040; }
     .back-to-top:focus { outline: 3px solid yellow; opacity: 1; background-color: #FF8040; } 
 
-    /* ★★★ 這裡就是您原本遺失的 RWD 手機版設定！請務必包含這段 ★★★ */
+    /* ★★★ RWD 手機版設定 (務必保留) ★★★ */
     @media (max-width: 900px) {
         .school-title-cn { font-size: 1.8em; } .school-title-en { font-size: 1em; }
         .header-left { width: 80%; } .school-logo { height: 60px; margin-right: 10px; }
@@ -295,8 +306,8 @@
 <h2 class="block-title" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">資訊分類清單</h2>
 <ul class="link-list-container">
 <li class="link-list-entry">
-<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-5dc69674" onclick="toggleAccordion(this)" title="展開/收合 親師生專區"><span class="acc-title">親師生專區</span><span class="acc-icon">▼</span></button>
-<ul id="acc-5dc69674" class="accordion-panel" hidden>
+<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-ca3c13b3" onclick="toggleAccordion(this)" title="展開/收合 親師生專區"><span class="acc-title">親師生專區</span><span class="acc-icon">▼</span></button>
+<ul id="acc-ca3c13b3" class="accordion-panel" hidden>
 <li class="sub-link-item"><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-709.php?Lang=zh-tw" target="_blank" data-title="教師專區 (另開新視窗)">教師專區</a></li>
 <li class="sub-link-item"><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-710.php?Lang=zh-tw" target="_blank" data-title="學生專區 (另開新視窗)">學生專區</a></li>
 <li class="sub-link-item"><a href="https://www.ykes.ntpc.edu.tw/p/412-1000-711.php?Lang=zh-tw" target="_blank" data-title="家長專區 (另開新視窗)">家長專區</a></li>
@@ -393,8 +404,8 @@
 <div class="center-content-wrapper">
 <div class="block-card" id="blk-center-0">
 <h2 class="block-title" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">活動影音</h2>
-<div class="carousel-container cols-3" id="carousel-C9b32d618" data-cols="3">
-<button type="button" class="pause-btn" onclick="togglePause('C9b32d618')" aria-label="暫停輪播">II 暫停</button>
+<div class="carousel-container cols-3" id="carousel-Cb5918418" data-cols="3">
+<button type="button" class="pause-btn" onclick="togglePause('Cb5918418')" aria-label="暫停輪播">II 暫停</button>
 <ul class="carousel-list">
 <li class="carousel-item">
 <a href="https://youtu.be/p74x3UgZxJ4?si=yXw6EIV2h0u1tfXs" target="_blank" data-title="1141117新北市音樂比賽 (另開新視窗)" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: inherit; height: 100%;">
@@ -415,11 +426,11 @@
 </a>
 </li>
 </ul>
-<button type="button" class="control-btn prev" onclick="moveSlide(-1, 'C9b32d618')" aria-label="上一組內容">❮</button>
-<button type="button" class="control-btn next" onclick="moveSlide(1, 'C9b32d618')" aria-label="下一組內容">❯</button>
+<button type="button" class="control-btn prev" onclick="moveSlide(-1, 'Cb5918418')" aria-label="上一組內容">❮</button>
+<button type="button" class="control-btn next" onclick="moveSlide(1, 'Cb5918418')" aria-label="下一組內容">❯</button>
 <div class="dots-container"></div>
 </div>
-<script>document.addEventListener('DOMContentLoaded', function() { initCarousel('C9b32d618'); });</script>
+<script>document.addEventListener('DOMContentLoaded', function() { initCarousel('Cb5918418'); });</script>
 </div>
 <div class="block-card" id="blk-center-1">
 <h2 class="block-title" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">最新公告</h2>
@@ -431,8 +442,8 @@
 </div>
 <div class="block-card" id="blk-center-3">
 <h2 class="block-title" style="color: #FF8C00; border-bottom: 2px solid #FF8C00; padding-bottom: 0.2em;" tabindex="-1">活動相簿</h2>
-<div class="carousel-container cols-3" id="carousel-C221a7bbd" data-cols="3">
-<button type="button" class="pause-btn" onclick="togglePause('C221a7bbd')" aria-label="暫停輪播">II 暫停</button>
+<div class="carousel-container cols-3" id="carousel-C602f4d08" data-cols="3">
+<button type="button" class="pause-btn" onclick="togglePause('C602f4d08')" aria-label="暫停輪播">II 暫停</button>
 <ul class="carousel-list">
 <li class="carousel-item">
 <a href="https://photos.google.com/share/AF1QipOcZgTEqSy-DkiWFL2JmFJuZdhMmZ2Fb6_MPAD2N31bRyMD1TkUEiK9iW9Sh4kWwQ?key=LU9Zekk1cWV5T0d1eWpEVXJBbEpna19TUXNaOFNn" target="_blank" data-title="1141003&1017閱讀護照晉級&美展頒獎 (另開新視窗)" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; color: inherit; height: 100%;">
@@ -453,11 +464,11 @@
 </a>
 </li>
 </ul>
-<button type="button" class="control-btn prev" onclick="moveSlide(-1, 'C221a7bbd')" aria-label="上一組內容">❮</button>
-<button type="button" class="control-btn next" onclick="moveSlide(1, 'C221a7bbd')" aria-label="下一組內容">❯</button>
+<button type="button" class="control-btn prev" onclick="moveSlide(-1, 'C602f4d08')" aria-label="上一組內容">❮</button>
+<button type="button" class="control-btn next" onclick="moveSlide(1, 'C602f4d08')" aria-label="下一組內容">❯</button>
 <div class="dots-container"></div>
 </div>
-<script>document.addEventListener('DOMContentLoaded', function() { initCarousel('C221a7bbd'); });</script>
+<script>document.addEventListener('DOMContentLoaded', function() { initCarousel('C602f4d08'); });</script>
 </div>
 </div>
 </main>
@@ -547,8 +558,8 @@
 <a href="https://sites.google.com/mail.ykes.ntpc.edu.tw/acc" target="_blank" data-title="吾愛鶯園 (另開新視窗)" class="link-list-item single-link">吾愛鶯園</a>
 </li>
 <li class="link-list-entry">
-<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-d33a4299" onclick="toggleAccordion(this)" title="展開/收合 鶯小兒童電子書"><span class="acc-title">鶯小兒童電子書</span><span class="acc-icon">▼</span></button>
-<ul id="acc-d33a4299" class="accordion-panel" hidden>
+<button type="button" class="accordion-btn" aria-expanded="false" aria-controls="acc-9fa2f921" onclick="toggleAccordion(this)" title="展開/收合 鶯小兒童電子書"><span class="acc-title">鶯小兒童電子書</span><span class="acc-icon">▼</span></button>
+<ul id="acc-9fa2f921" class="accordion-panel" hidden>
 <li class="sub-link-item"><a href="http://web.ykes.ntpc.edu.tw/magazine/ykes38/" target="_blank" data-title="鶯小兒童第38期     (100學年度) (另開新視窗)">鶯小兒童第38期     (100學年度)</a></li>
 <li class="sub-link-item"><a href="http://web.ykes.ntpc.edu.tw/magazine/ykes51/" target="_blank" data-title="鶯小兒童第51期     (113學年度) (另開新視窗)">鶯小兒童第51期     (113學年度)</a></li>
 </ul>
@@ -719,21 +730,25 @@
                 <div class="footer-container">
                     
                     <div style="margin-bottom: 5px;">
-                        <a href="#ah" id="ah" accesskey="H" title="下方功能區" class="access-key" style="color:#ccc;">:::</a>
+                        <a href="#ah" id="ah" accesskey="H" title="下方功能區" class="access-key" style="color:#ccc; text-decoration: none;">:::</a>
                     </div>
                     <div style="line-height: 1.8;">
-                        © 2025 新北市鶯歌區鶯歌國民小學 版權所有<br>
-地址：39新北市鶯歌區尖山埔路106號<br>
-電話：<a href="tel:0226792038" style="color:#fff; text-decoration:underline;" data-title="撥打電話">(02)26792038</a> | 傳真：(02)2678-4724<br>
+                        地址：239新北市鶯歌區尖山埔路106號<br>
+電話：<a href="tel:0226792038" style="color:#fff; text-decoration:underline;" data-title="撥打電話">(02)2679-2038</a> | 傳真：(02)2678-4724<br>
 信箱：<a href="mailto:mis@mail.ykes.ntpc.edu.tw" style="color:#fff; text-decoration:underline;" data-title="寄信">mis@mail.ykes.ntpc.edu.tw</a><br>
 統一編號：34185667 | 機關代碼：382070600Y<br>
 
                     </div>
-
                     <div class="footer-badge">
                         
                     </div>
                 
+                </div>
+
+                
+                <div class="footer-copyright">
+                    <div class="nav-container"> © 2025 新北市鶯歌區鶯歌國民小學 版權所有
+                    </div>
                 </div>
             </footer>
             
